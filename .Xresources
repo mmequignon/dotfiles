@@ -1,0 +1,5 @@
+#include ".Xresources.d/Base.Xresources"
+#include ".Xresources.d/Extensions.Xresources"
+#include ".Xresources.d/Font.Xresources"
+#include ".Xresources.d/Mapping.Xresources"
+#include ".Xresources.d/Theme.Xresources"

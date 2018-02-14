@@ -1,0 +1,31 @@
+URxvt*imlocale:             fr_FR.UTF-8 
+URxvt*eightBitInput:        true
+
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 30
+
+! General
+urxvt*termName:  rxvt-unicode-256color
+urxvt*loginShell:         true
+urxvt*scrollBar:         false
+urxvt*secondaryScroll:    true
+urxvt*saveLines:         65535
+urxvt*cursorBlink:       true
+urxvt*urgentOnBell:       true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!  - catch ugly URLs
+urxvt.cutchars:        "`()'*<>[]{|}"
+
+! Do not scroll to bottom when tty receives output
+URxvt*scrollTtyOutput:  false
+! scroll to bottom when a non-special key pressed
+URxvt*scrollTtyKeypress:  true
+! do not scroll with scrollback when tty receives new lines
+URxvt*scrollWithBuffer:  true
+
+URxvt.intensityStyles: false
+
+!!SCROLLBAR
+URxvt.scrollBar: false
