@@ -1,5 +1,2 @@
-URxvt.font:xft:Ubuntu Mono derivative Powerline:style=Regular:size=19:hinting=false:autohint=false:antialias=true
-URxvt.boldFont:xft:Ubuntu Mono derivative Powerline:style=Bold:size=19:hinting=false:autohint=false:antialias=true
-URxvt.italicFont:xft:Ubuntu Mono derivative Powerline:style=Oblique:size=19:hinting=false:autohint=false:antialias=true
-URxvt.boldItalicFont:xft:Ubuntu Mono derivative Powerline:style=Bold\ Oblique:size=19:hinting=false:autohint=false:antialias=true
+URxvt*font:xft:UbuntuMono Nerd Font Mono:size=22:style=Medium:hinting=false:autohint=false:antialias=true
 URxvt.letterSpace:0
