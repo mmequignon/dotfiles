@@ -1,3 +1,4 @@
+set t_Co=256
 let g:colorscheme_plan=[
-    \{'colorscheme': 'solarized8_high', 'background': 'dark', 'airline': 'cobalt2'},
+    \{'colorscheme': 'solarized', 'background': 'dark', 'airline': 'cobalt2'},
 \]

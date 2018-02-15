@@ -22,9 +22,8 @@ let maplocalleader=";"
 syntax enable
 let python_highlight_all = 1
 
-set termguicolors
 set background=dark
-colorscheme solarized8_high
+colorscheme solarized
 
 " Commencer à chercher dès qu'on tape un texte de recherche
 set incsearch 
