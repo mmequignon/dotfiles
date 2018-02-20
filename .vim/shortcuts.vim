@@ -3,11 +3,7 @@
 " raccourcis 
 "--------------------------------------------------------------
 
-nnoremap <silent> <F2> :call NormalCheck()<CR>
-nmap <silent> <F2> :call NormalCheck()<CR>
-autocmd FileType python nnoremap <silent> <F3> :call OdooCheck()<CR>
-nmap <silent> <F3> :call OdooCheck()<CR>
-nmap <silent> <F4> :call ToggleTabHere()<CR>
+nnoremap <silent><expr> <F4> g:NERDTree.IsOpen() ? ":NERDTreeClose\<CR>" : bufname("%") == "" ? ":NERDTreeCWD\<CR>" : ":NERDTreeFind\<CR>" 
 nnoremap <silent> <F5> :tabp<CR>
 nnoremap <silent> <F6> :tabn<CR>
 nnoremap <silent> <F7> :UndotreeToggle<cr>

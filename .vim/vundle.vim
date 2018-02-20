@@ -5,8 +5,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim                                                                                
 call vundle#begin()                                                                                              
 Plugin 'VundleVim/Vundle.vim'                                                                                    
-
-Bundle 'mmequignon/nerdtree'                                                                                     
+Bundle 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vcscommand.vim'
 Plugin 'vim-airline/vim-airline'
