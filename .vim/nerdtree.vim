@@ -3,6 +3,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeIgnore=['\~$', '\.pyc$']    " Files to ignore (default = ['\~$'])
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.class$']    " Files to ignore (default = ['\~$'])
 let NERDTreeQuitOnOpen=1
 let NERDTreeMinimalUI=1

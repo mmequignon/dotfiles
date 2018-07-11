@@ -13,5 +13,8 @@ source ~/.vim/tmuxline.vim
 source ~/.vim/VCS.vim
 source ~/.vim/C++.vim
 source ~/.vim/ale.vim
+source ~/.vim/fzf.vim
+source ~/.vim/ack.vim
+source ~/.vim/deoplete.vim
 source ~/.vim/bottom.vim
 source ~/.vim/NERDCommenter.vim
