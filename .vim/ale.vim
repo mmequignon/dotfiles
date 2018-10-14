@@ -1,5 +1,5 @@
 let g:ale_linters = {
-\    'python': ['flake8', 'pylint'],
+\    'python': ['pylint-odoo', 'flake8'],
 \    'cpp': ['cppcheck', 'clang'],
 \    'rust': ['cargo', 'rustc'],
 \    'latex': ['chktex'],

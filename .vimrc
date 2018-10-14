@@ -16,5 +16,6 @@ source ~/.vim/ale.vim
 source ~/.vim/fzf.vim
 source ~/.vim/ack.vim
 source ~/.vim/deoplete.vim
+source ~/.vim/vim-markdown-composer.vim
 source ~/.vim/bottom.vim
 source ~/.vim/NERDCommenter.vim

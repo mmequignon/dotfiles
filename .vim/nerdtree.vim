@@ -6,3 +6,4 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.class$']    " Files to ignore (default = ['\~$'])
 let NERDTreeQuitOnOpen=1
 let NERDTreeMinimalUI=1
+let NERDTreeAutoDeleteBuffer = 1

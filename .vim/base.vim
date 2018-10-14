@@ -64,12 +64,3 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 20
-
-
-" -----
-" JFLEX
-" -----
-augroup filetype
-    au BufRead,BufNewFile *.flex,*.jflex    set filetype=jflex
-augroup END
-au Syntax jflex    so ~/.vim/syntax/jflex.vim
