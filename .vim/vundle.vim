@@ -21,6 +21,8 @@ Plugin 'w0rp/ale'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'mhinz/vim-signify'
 Plugin 'euclio/vim-markdown-composer'
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

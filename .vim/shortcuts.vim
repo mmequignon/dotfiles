@@ -5,6 +5,7 @@
 
 nnoremap <silent> <F3> :Ack
 nnoremap <silent><expr> <F4> g:NERDTree.IsOpen() ? ":NERDTreeClose\<CR>" : bufname("%") == "" ? ":NERDTreeCWD\<CR>" : ":NERDTreeFind\<CR>"
+nnoremap <silent><F5> :!%:p<CR>
 nnoremap <silent> <F7> :UndotreeToggle<cr>
 nnoremap <silent> <F8> :TagbarToggle <CR> \| :TagbarTogglePause<CR>
 nnoremap <silent> <F9> :CMake<CR>
