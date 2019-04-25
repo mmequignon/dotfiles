@@ -47,6 +47,7 @@ set showcmd                     " show (partial) command in status line
 
 
 set colorcolumn=80
+set cul
 set fileformat=unix
 set hid
 

@@ -16,32 +16,6 @@ function! s:CloseHiddenBuffers()
   endfor
 endfunction
 
-let g:colorscheme_plan=[]
-
-let g:current_pos = 0
-
-function! CycleColor()
-    let g:current_pos = (g:current_pos+1)%len(g:colorscheme_plan)
-    if !empty(g:colorscheme_plan)
-        set t_Co=256
-        exe "colorscheme default"
-        exe "set background=".g:colorscheme_plan[g:current_pos]['background']
-        exe "colorscheme ".g:colorscheme_plan[g:current_pos]['colorscheme']
-        if exists(':AirlineTheme')
-            if exists("g:colorscheme_plan[g:current_pos]['airline']")
-                exe "AirlineTheme ".g:colorscheme_plan[g:current_pos]['airline']
-            else
-                exe "AirlineTheme ".g:colorscheme_plan[g:current_pos]['background']
-            endif
-            if exists(':Tmuxline')
-                if exists('$TMUX')
-                    exe "Tmuxline airline"
-                endif
-            endif
-        endif
-    endif
-endfu
-
 function! ToggleTabHere()
     if g:NERDTree.IsOpen()
         NERDTreeClose

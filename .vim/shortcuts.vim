@@ -3,22 +3,16 @@
 " raccourcis
 "--------------------------------------------------------------
 
-nnoremap <silent> <F3> :Ack
+nnoremap <silent> <F2> :FZF<CR>
+nnoremap <silent> <F3> :Ack<Space>-Hi<Space>
 nnoremap <silent><expr> <F4> g:NERDTree.IsOpen() ? ":NERDTreeClose\<CR>" : bufname("%") == "" ? ":NERDTreeCWD\<CR>" : ":NERDTreeFind\<CR>"
-nnoremap <silent><F5> :!%:p<CR>
 nnoremap <silent> <F7> :UndotreeToggle<cr>
 nnoremap <silent> <F8> :TagbarToggle <CR> \| :TagbarTogglePause<CR>
-nnoremap <silent> <F9> :CMake<CR>
-autocmd QuickFixCmdPost    l* nested lwindow
-command -nargs=* Make make <args> | cwindow 3
-nnoremap <silent> <F10> :make<CR>
-nnoremap <silent> <F11> :! ../build/exe<CR>
 nnoremap <C-t> :tabnew<CR>
 
+
 "désactivation de la surbrillance de la dernière recherche ctrl + n
-noremap	<C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-nnoremap <C-n> :nohl<CR>
+nnoremap <Leader>* :nohl<CR>
 
 "classer avec leader + s
 vnoremap <Leader>s :sort<CR>
@@ -30,7 +24,6 @@ vnoremap > >gv
 nnoremap <Leader>k :CloseHiddenBuffers<CR>
 
 nnoremap <Leader>- yyp<c-v>$r-
-vnoremap <Leader>- yyp<c-v>$r-
 nnoremap <Leader>+ yyp<c-v>$r+
 nnoremap <Leader>_ yyp<c-v>$r_
 nnoremap <Leader>= yyp<c-v>$r=
