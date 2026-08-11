@@ -39,7 +39,6 @@ in {
         signByDefault = true;
       };
       ignores = [
-        "default.nix"
         ".python-version"
       ];
       settings = {
