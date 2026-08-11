@@ -1,0 +1,67 @@
+# Colors (Blue Mood)
+[colors.primary]
+background = "#104e8b" # dodgerblue4
+foreground = "#f5f5f5" # whitesmoke
+
+[colors.normal]
+black   = "#000000" # black
+red     = "#ff0000" # red
+green   = "#7fff00" # chartreuse_green
+yellow  = "#ffd700" # gold
+blue    = "#4f94cd" # Remplace "#235c94" (invisible) par un bleu plus clair (steelblue3)
+magenta = "#4f94cd" # steelblue3
+cyan    = "#f5deb3" # wheat
+white   = "#bfbfbf" # gray75
+
+[colors.bright]
+black   = "#a9a9a9" # Remplace "#4d4d4d" (gris sombre invisible) par un gris intermédiaire ou clair
+red     = "#ff6347" # tomato
+green   = "#7fff00" # chartreuse_green
+yellow  = "#ffff00" # yellow
+blue    = "#00cdcd" # cyan3
+magenta = "#00ffff" # cyan
+cyan    = "#f5deb3" # wheat
+white   = "#f5f5f5" # whitesmoke
+# # Colors (Selenized dark)
+# 
+# # Default colors
+# [colors.primary]
+# background =  '0x103c48'
+# foreground =  '0xadbcbc'
+# 
+# # Normal colors
+# [colors.normal]
+# black =    '0x184956'
+# red =      '0xfa5750'
+# green =    '0x75b938'
+# yellow =   '0xdbb32d'
+# blue =     '0x4695f7'
+# magenta =  '0xf275be'
+# cyan =     '0x41c7b9'
+# white =    '0x72898f'
+# 
+# # Bright colors
+# [colors.bright]
+# black =    '0x2d5b69'
+# red =      '0xff665c'
+# green =    '0x84c747'
+# yellow =   '0xebc13d'
+# blue =     '0x58a3ff'
+# magenta =  '0xff84cd'
+# cyan =     '0x53d6c7'
+# white =    '0xcad8d9'
+
+[debug]
+render_timer = false
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Iosevka Nerd Font Mono"
+
+[terminal]
+
+[terminal.shell]
+args = ["-l", "-c", "tmux"]
+program = "/home/mmequignon/.nix-profile/bin/zsh"

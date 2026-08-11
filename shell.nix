@@ -32,7 +32,7 @@ in {
     };
     xdg = {
       configFile = {
-        "terminator/config".source = ./dotfiles/terminator.conf;
+        "alacritty".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/alacritty;
       };
     };
     programs = {
