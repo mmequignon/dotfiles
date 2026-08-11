@@ -8,7 +8,14 @@ in {
   # Let Home Manager install and manage itself.
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
-
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [
+          "nix-command" "flakes"
+      ];
+    };
+  };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mmequignon";
