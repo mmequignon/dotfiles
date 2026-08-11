@@ -1,0 +1,11 @@
+snippet test-requirements "OCA dependencies <= 14"
+odoo${1:version (without .0)}-addon-${2:module name} @ git+https://github.com/OCA/${3:repository}@refs/pull/${4:PR number}/head#subdirectory=setup/$2
+endsnippet
+
+snippet test-requirements "OCA dependencies 15,16"
+odoo-addon-${1:module name} @ git+https://github.com/OCA/${2:repository}@refs/pull/${3:PR number}/head#subdirectory=setup/$1
+endsnippet
+
+snippet test-requirements "OCA dependencies >= 17"
+odoo-addon-${1:module_name} @ git+https://github.com/OCA/${2:repository}@refs/pull/${3:PR number}/head#subdirectory=$1
+endsnippet

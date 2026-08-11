@@ -19,8 +19,7 @@ in {
     ./shell.nix
     ./gpg.nix
     ./git.nix
-    ./nvim.nix
-    ./services.nix
+    ./nvim
   ];
 
   xdg = {

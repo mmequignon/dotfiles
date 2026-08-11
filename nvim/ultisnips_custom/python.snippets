@@ -351,9 +351,29 @@ return {
 endsnippet
 
 snippet import
-from odoo import ${1:_, }${2:api, }${3:exceptions, }${4:fields, }${5:models}
+from odoo import ${1:api, }${2:exceptions, }${3:fields, }${4:models}
 
 $0
+endsnippet
+
+snippet setupclassi
+@classmethod
+def setUpClass${1}(cls):
+	res = super().setUpClass$1()
+	$0
+	return res
+endsnippet
+
+snippet otesti "Odoo Unit Tests Inherited"
+from ${3:.common} import $2
+
+
+class ${1:TestX}(${2:Common}):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+		$0
 endsnippet
 
 snippet otest "Odoo Unit Tests"
