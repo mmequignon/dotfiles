@@ -32,6 +32,7 @@ in {
 
   home.file = {
       "bin".source = config.lib.file.mkOutOfStoreSymlink "${NIX_CONFIG}/bin";
+      "cheats".source = config.lib.file.mkOutOfStoreSymlink "${NIX_CONFIG}/dotfiles/navi_cheats";
   };
 
   # Installed fonts
@@ -53,6 +54,18 @@ in {
   };
 
   programs = {
+      # asciinema = {
+      #   enable = false;
+      # };
+      navi = {
+        enable = true;
+        enableZshIntegration = true;
+        settings = {
+            cheats = {
+                path = "~/cheats";
+            };
+        };
+      };
       ncmpcpp = {
         enable = true;
         bindings = [

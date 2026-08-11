@@ -1,0 +1,19 @@
+% gpg, yubikey, setup
+
+# Clean slate: Purger intégralement les clés et le trousseau GPG local
+rm -f ~/.gnupg/private-keys-v1.d/*.key ~/.gnupg/pubring.kbx ~/.gnupg/pubring.kbx~ ~/.gnupg/trustdb.gpg
+
+# Importer la clé publique depuis GitHub
+curl -s https://github.com/<github_user>.gpg | gpg --import
+
+# Détecter la carte physique et régénérer les stubs locaux (.key)
+gpg --card-status
+
+# Attribuer la confiance ultime à la nouvelle clé principale
+gpg --edit-key <key_id>
+
+# Redémarrer gpg-agent pour appliquer les changements
+gpgconf --kill gpg-agent
+
+$ github_user: echo "mmequignon"
+$ key_id: gpg --list-keys --keyid-format LONG | grep -E '^pub' | awk '{print $2}' | cut -d'/' -f2
