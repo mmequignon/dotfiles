@@ -9,45 +9,32 @@ in
     ## GPG
     pinentry-qt
   ];
-    programs.gpg = {
-      enable = true;
-      settings = {
-        keyserver = "keys.openpgp.org";
-        default-key = "${gpg_signing_key}";
-      };
+  programs.gpg = {
+    enable = true;
+    settings = {
+      keyserver = "keys.openpgp.org";
+      default-key = "${gpg_signing_key}";
     };
+  };
 
-    programs.browserpass = {
-      enable = true;
-      browsers = [
-        "firefox"
-      ];
-    };
-
-    programs.password-store = {
-      enable = true;
-      settings = {
-        PASSWORD_STORE_DIR = "$HOME/password-store";
-      };
-      package = pkgs.pass.withExtensions (exts: [
-        exts.pass-import
-      ]);
-    };
-
-    services.gpg-agent = {
-      enable = true;
-      enableSshSupport = true;
-      defaultCacheTtl = 18000;
-      maxCacheTtl = 36000;
-      defaultCacheTtlSsh = 18000;
-      maxCacheTtlSsh = 36000;
-      extraConfig = ''
-        pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
-        allow-emacs-pinentry
-        allow-loopback-pinentry
-      '';
-      sshKeys = [
-        "${ssh_key}"
-      ];
-    };
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryPackage = pkgs.pinentry-qt;
+    defaultCacheTtl = 18000;
+    maxCacheTtl = 36000;
+    defaultCacheTtlSsh = 18000;
+    maxCacheTtlSsh = 36000;
+    extraConfig = ''
+      no-grab
+      allow-emacs-pinentry
+      allow-loopback-pinentry
+    '';
+    sshKeys = [
+      "${ssh_key}"
+    ];
+  };
+  programs.zsh.initExtra = ''
+      export GPG_TTY=$(tty)
+  '';
 }
