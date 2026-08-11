@@ -9,7 +9,9 @@ in {
     programs = {
       zsh = {
         enable = true;
-        enableAutosuggestions = true;
+        autosuggestion = {
+            enable = true;
+        };
         enableCompletion = true;
         shellAliases = {
           cpr = "rsync -a --info = progress2";
@@ -19,22 +21,20 @@ in {
           llas = "ls -laSh";
           grep = "grep --color";
           tmux = "tmux -2";
-          timesheet = "source $HOME/bin/set-passwords ; $HOME/bin/gtimelog2odoo/exporter.py -c $HOME/stuff/gtimelogrc";
-          doco = "docker-compose";
-          docu = "docker-compose up -d";
-          docr = "docker-compose run --rm";
-          docl = "docker-compose logs";
-          docsh = "docker-compose run --rm odoo odoo shell";
-          dood = "docker-compose run --rm odoo odoo";
+          doco = "docker compose";
+          docu = "docker compose up -d";
+          docr = "docker compose run --rm";
+          docl = "docker compose logs";
+          docsh = "docker compose run --rm odoo odoo shell";
+          dood = "docker compose run --rm odoo odoo";
           dp = "docker ps --format json | grep $(basename $(pwd)) | grep postgres | jq '.[\"Ports\"]' | grep -oE '0\.0\.0\.0:([0-9]{5})' | awk -F ':' '{print $2}'";
           dpgcli = "PGPASSWORD=odoo pgcli -p $(dp) -u odoo -h localhost -d";
-          dood_test_setup = "docker-compose run --rm -e DB_NAME=testdb odoo testdb-gen -i base";
-          dood_test_update = "docker-compose run --rm -e DB_NAME=testdb odoo testdb-update";
-          dood_test_run = "docker-compose run --rm -e DB_NAME=testdb odoo pytest -s";
-          dood_test_run_odoo = "docker-compose run --rm -e DEMO=True -e DB_NAME=testdb -e MIGRATE=False odoo odoo --workers=0 --test-enable --stop-after-init";
-          dood_run_travis = "docker-compose -f travis/docker-compose.yml run --rm -e DEMO=True odoo runtests";
-          vimdiff = "nvim -d";
-          vfzf = "nvim \"$(fzf)\"";
+          dood_test_setup = "docker compose run --rm -e DB_NAME=testdb odoo testdb-gen -i base";
+          dood_test_update = "docker compose run --rm -e DB_NAME=testdb odoo testdb-update";
+          dood_test_run = "docker compose run --rm -e DB_NAME=testdb odoo pytest -s";
+          dood_test_run18 = "docker compose run --rm -e DB_NAME=testdb -e ODOO_TEST_FAILURE_RETRIES=-1 odoo pytest -s";
+          dood_test_run_odoo = "docker compose run --rm -e DEMO=True -e DB_NAME=testdb -e MIGRATE=False odoo odoo --workers=0 --test-enable --stop-after-init";
+          dood_run_travis = "docker compose -f travis/docker compose.yml run --rm -e DEMO=True odoo runtests";
         };
         sessionVariables = {
           PATH = "/home/mmequignon/bin:/home/mmequignon/.local/bin:$PATH";
@@ -43,10 +43,13 @@ in {
           GITHUB_TOKEN = "${GH_GITHUB_KEY}";
         };
         # autoload -U compinit && compinit
-        initExtra = ''
+        initContent = ''
             passgen() {
               pass generate "$1" && pass edit "$1";
             }
+            # export PYENV_ROOT="/home/mmequignon/.local/share/pyenv"
+            # eval "$(pyenv init - zsh)"
+            # eval "$(pyenv virtualenv-init - zsh)"
         '';
         oh-my-zsh.enable = true;
       };
@@ -71,7 +74,7 @@ in {
           };
           cmd_duration.disabled = true;
           git_status.disabled = false;
-          format = lib.concatStrings [ "$username" "$hostname" "$directory" "$git_branch" "$git_state" ];
+          format = lib.concatStrings ["$direnv" "$username" "$hostname" "$directory" "$git_branch" "$git_state" ];
         };
       };
     };
