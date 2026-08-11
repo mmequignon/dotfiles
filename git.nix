@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  FWZTE_MATTHIEU_ADDRESS = import ./secrets/malignly.nix;
+  MAIL_ADDR = "matthieu.mequignon@camptocamp.com";
   GPG_SIGNING_KEY = import ./secrets/indented.nix;
   git-autoshare = with pkgs.python3Packages; buildPythonPackage rec {
     pname = "git-autoshare";
@@ -10,19 +10,20 @@ let
       inherit pname version;
       sha256 = "d1dff471af5c8f30676362aa84b6d70c0aedbcc6b57a02e2c84dd4d5062bed7a";
     };
-    checkInputs = [ setuptools_scm ];
+    pyproject = true;
+    build-system = [ setuptools ];
+    checkInputs = [ setuptools-scm ];
     propagatedBuildInputs = [ pyyaml appdirs click ];
   };
 in {
   home.packages = with pkgs; [
     nix-prefetch-git nix-prefetch-github 
-    git-crypt gitAndTools.hub gitAndTools.lab
-    git-autoshare meld delta
-    gh hub git-absorb
+    git-autoshare delta git-absorb
+    # CLI tools for git{hub,lab}
+    hub lab
   ];
     xdg.configFile = {
       "git-autoshare/repos.yml".source = ./dotfiles/git_autoshare_repos.yml;
-      "gh-dash/config.yml".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/gh-dash-config.yml;
     };
 
     home = {
@@ -31,34 +32,31 @@ in {
       };
     };
     programs.git = {
-      package = pkgs.gitAndTools.gitFull;
+      package = pkgs.gitFull;
       enable = true;
-      userEmail = "${FWZTE_MATTHIEU_ADDRESS}";
       signing = {
         key = "${GPG_SIGNING_KEY}";
         signByDefault = true;
       };
       ignores = [
         "default.nix"
+        ".python-version"
       ];
-      aliases = {
-        #log = "--no-pager log --graph --decorate";
-        glog = "log --graph --decorate --oneline";
-        ci = "commit";
-        st = "status";
-      };
-      extraConfig = {
+      settings = {
+        alias = {
+          glog = "log --graph --decorate --oneline";
+          stat = "!git diff $(git merge-base HEAD master) --stat";
+        };
         core = {
           editor = "nvim";
-          excludesfile = "~/.gitignore";
-          #pager = "less -FX";
           pager = "${pkgs.delta}/bin/delta";
         };
         pull = {
           rebase = true;
         };
         user = {
-          name = "Mmequignon";
+          email = "${MAIL_ADDR}";
+          name = "MmeQuignon";
         };
         hub = {
           protocol = "ssh";
@@ -76,7 +74,6 @@ in {
         };
         merge = {
           conflictstyle = "diff3";
-          #tool = "meld";
         };
       };
     };

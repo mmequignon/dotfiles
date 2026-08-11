@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$1" == "clone" ]
+then
+    shift
+    /home/mmequignon/.nix-profile/bin/git autoshare-clone "$@"
+else
+    /home/mmequignon/.nix-profile/bin/git "$@"
+fi
