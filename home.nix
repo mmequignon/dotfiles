@@ -2,7 +2,7 @@
 
 let
   MPD_MUSIC_DIRECTORY = "/srv/share/music"; 
-  NIX_CONFIG = "/home/mmequignon/.config/nixpkgs";
+  NIX_CONFIG = "/home/mmequignon/.config/home-manager";
   NIX_CONFIG_DOTFILES = "${NIX_CONFIG}/dotfiles";
 in {
   # Let Home Manager install and manage itself.
@@ -26,7 +26,6 @@ in {
     userDirs.enable = true;
     configFile = {
       "awesome".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/awesome;
-      "mc".source = "${NIX_CONFIG_DOTFILES}/mc";
     };
   };
 
@@ -35,11 +34,11 @@ in {
       "cheats".source = config.lib.file.mkOutOfStoreSymlink "${NIX_CONFIG}/dotfiles/navi_cheats";
   };
 
-  # Installed fonts
+  # Let home-manager install fonts
   fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-      iosevka
-  ];
+  xresources.properties = {
+    "Xft.dpi" = 164;
+  };
 
 
   services = {
@@ -100,11 +99,11 @@ in {
         };
 
       };
-      rofi = {
-        enable = true;
-        location = "top";
-        theme = "solarized";
-      };
+      # rofi = {
+      #   enable = true;
+      #   location = "top";
+      #   theme = "solarized";
+      # };
       fzf = {
         enable = true;     # TODO configuration
         enableZshIntegration = false;
