@@ -1,0 +1,563 @@
+snippet html_url
+"<a href='#' data-oe-model='${1:Model Name}' data-oe-id='%(record_id)d'>%(record_name)s</a>".format(
+	{"record_id": ${2:Record ID}, "record_name": ${3:Record Name}}
+)
+endsnippet
+
+snippet add_stock
+def _add_stock_to_product(self, product, location, qty):
+	"""Set the stock quantity of the product.
+
+	:param product: product.product recordset
+	:param qty: float
+	"""
+	self.env["stock.quant"].with_context(inventory_mode=True).create(
+		{
+			"product_id": product.id,
+			"location_id": location.id,
+			"inventory_quantity": qty,
+		}
+	)
+endsnippet
+
+snippet manifest
+{
+    "name": "${1:Module Name}",
+    "summary": "${2:Brief Summary}",
+    "version": "${3:Odoo Version}.0.1.0.0",
+    "category": "${4:Category. e.g: Sales}",
+    "website": "https://github.com/OCA/${5:OCA Repo}",
+    "website": "https://www.camptocamp.com",
+    "author": "${6:Camptocamp}${7:, Odoo Community Association (OCA)}",
+	"maintainers": ["mmequignon"],
+    "license": "${8:AGPL-3}",
+    "installable": True,
+	"auto_install": True,
+    "depends": [${9:Module Deps}],
+    "data": [${10:Data Files}],
+}
+endsnippet
+
+snippet #!
+#!/usr/bin/env python
+# -*- coding: ${1:utf-8} -*-
+endsnippet
+
+snippet pprint
+import pprint; pprint.pprint(${1:whatever})
+endsnippet
+
+snippet pdb
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet pprintfile
+with open("${1:filename.txt}", "${2:w+}") as ${3:f}:
+	__import__("pprint").pprint(${4:whatever}, stream=$3)
+endsnippet
+
+snippet uninstall
+@anthem.log
+def uninstall_modules(ctx):
+    """ Uninstall modules """
+       module_names = ("${1:MODULE}", $0)
+    modules = ctx.env["ir.module.module"].search(
+        [
+            ("name", "in", module_names),
+            ("state", "in", ["installed", "to upgrade"]),
+        ]
+    )
+    if modules:
+        uninstall(ctx, modules.mapped("name"))
+endsnippet
+
+snippet coding
+# -*- coding: ${1:utf-8} -*-
+endsnippet
+
+snippet ccc "Copyright Camptocamp"
+# Copyright ${1:`date +%Y`} Camptocamp SA
+# License ${2:AGPL}-3.0 or later (http://www.gnu.org/licenses/`!p snip.rv = t[2].lower()`)
+endsnippet
+
+snippet cccl "Copyright Camptocamp"
+# Copyright ${1:`date +%Y`} Camptocamp SA
+# License ${2:LGPL}-3.0 or later (http://www.gnu.org/licenses/`!p snip.rv = t[2].lower()`)
+endsnippet
+
+snippet cccopl "Copyright Camptocamp"
+# Copyright ${1:`date +%Y`} Camptocamp SA
+# License OEEL-1
+endsnippet
+
+snippet mmo_lgpl "Copyright Sebastien Alix"
+# Copyright ${1:2018} Sebastien Alix <https://usr-src.org>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+endsnippet
+
+snippet mmo_agpl "Copyright Sebastien Alix"
+# Copyright ${1:2018} Sebastien Alix <https://usr-src.org>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+endsnippet
+
+snippet todo "TODO"
+# TODO `$USER` `date +%Y-%m-%d`: $1
+endsnippet
+
+snippet ifmain "if __name__ == '__main__'"
+if __name__ == "__main__":
+    $1
+endsnippet
+
+snippet str2date "String -> Date"
+from datetime import datetime
+${1:my_date} = datetime.strptime(${2:my_date_str}, "${3:%Y-%m-%d}${4: %H:%M:%S}")${5:.date()}
+endsnippet
+
+snippet date2str "Date -> String"
+${1:my_date}_str = $1.strftime("${2:%Y-%m-%d}${3: %H:%M:%S}")
+endsnippet
+
+# =======
+# NEW API
+# =======
+
+snippet search "Odoo search"
+self.env["${1:odoo.model}"].search(
+	[
+		(${2}),
+	]
+)
+endsnippet
+
+snippet ref "Odoo Ref"
+self.env.ref(${1})
+endsnippet
+
+snippet omodel "Odoo Model (new)" b
+class `!p snip.rv = "".join(w.capitalize() for w in t[1].replace("_", ".").split("."))`(models.${2:Model}):
+    _name = "${1:new.model}"
+    _description = "${3:TODO}"
+    $4
+endsnippet
+snippet omodeli "Odoo Model (inherit)" b
+class `!p snip.rv = "".join(w.capitalize() for w in t[1].replace("_", ".").split("."))`(models.${2:Model}):
+    _inherit = "${1:inherited.model}"
+
+    $0
+endsnippet
+
+snippet omethod "Odoo Method"
+@api.${1:multi}
+def ${2:method}(self, ${3:arg,}):
+    """${4:Docstring}"""
+    for ${5:line} in self:
+        ${6:pass}
+    return True
+endsnippet
+
+snippet omethodi "Odoo Method (overload)"
+@api.${1:multi}
+def ${2:method}(self, ${3:arg,}):
+    """${4:Docstring}"""
+    res = super(${6:class_name}, self).$2($3)
+    for ${5:line} in self:
+        ${6:pass}
+    return res
+endsnippet
+
+snippet odefaultget "Odoo default_get Method"
+@api.model
+def default_get(self, fields_list):
+    """'default_get' method overloaded."""
+    res = super(${1:class_name}, self).default_get(fields_list)
+    return res
+endsnippet
+
+snippet ocopy "Odoo Copy Method"
+@api.multi
+def copy(self, default=None):
+    res = super(${1:class_name}, self).copy(default)
+    $2
+    return res
+endsnippet
+
+snippet ocreate "Odoo Create Method"
+@api.model
+def create(self, vals):
+    res = super(${1:class_name}, self).create(vals)
+    $2
+    return res
+endsnippet
+
+snippet owrite "Odoo Write Method"
+@api.multi
+def write(self, vals):
+    res = super(${1:class_name}, self).write(vals)
+    $2
+    return res
+endsnippet
+
+snippet ounlink "Odoo Unlink Method"
+@api.multi
+def unlink(self):
+    res = super(${1:class_name}, self).unlink()
+    $2
+    return res
+endsnippet
+
+snippet oonchange "Odoo onchange Method"
+@api.onchange
+def _onchange_${1:field}(self):
+    $2
+endsnippet
+
+# == Fields ==
+
+snippet ofc "fields.Char"
+${1:field_name} = fields.Char(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet ofb "fields.Boolean"
+${1:field_name}_ok = fields.Boolean(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+    default=False,
+)
+endsnippet
+
+snippet ofi "fields.Integer"
+${1:field_name} = fields.Integer(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet off "fields.Float"
+${1:field_name} = fields.Float(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+    digits=${3:(16, 2)},
+)
+endsnippet
+
+snippet ofbin "fields.Binary"
+${1:field_name} = fields.Binary(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet oft "fields.Text"
+${1:field_name} = fields.Text(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet ofd "fields.Date"
+${1:field_name} = fields.Date(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet ofdt "fields.Datetime"
+${1:field_name} = fields.Datetime(
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet ofs "fields.Selection"
+${1:field_name} = fields.Selection(
+    selection=[
+        ("${2:select1}", "${3:Select1}"),
+        ("${4:select2}", "${5:Select2}"),
+        ("${6:select3}", "${7:Select3}"),
+    ],
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+    default="$2"
+)
+endsnippet
+
+snippet m2o "fields.Many2one"
+${1:field_name}_id = fields.Many2one(
+    comodel_name="${2:my.relation}",
+    ondelete="${3:restrict}",
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet o2m "fields.One2many"
+${1:field_name}_ids = fields.One2many(
+    comodel_name="${2:my.relation}",
+    inverse_name="${3:field_id}",
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet m2m "fields.Many2many (auto)"
+${1:field_name}_ids = fields.Many2many(
+    comodel_name="${2:my.relation}",
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",
+)
+endsnippet
+
+snippet m2m "fields.Many2many (manual)"
+${1:field_name}_ids = fields.Many2many(
+    comodel_name="${2:my.relation}",
+	relation="${3}",
+	column1="${4}_id",
+	column2="${5}_id",
+    string="`!p snip.rv = " ".join(w.capitalize() for w in t[1].split("_"))`",$6
+)
+$0
+endsnippet
+
+snippet actwindow "ir.actions.act_window"
+return {
+    "domain": [("id", "in", $1)],
+    "name": "$2",
+    "view_type": "form",
+    "view_mode": "tree,form",
+    "res_model": "${3:my.model}",
+    "view_id": False,
+    "target": "${4:new}",
+    "type": "ir.actions.act_window",
+}
+endsnippet
+
+snippet actclose "ir.actions.act_window_close"
+return {'type': 'ir.actions.act_window_close'}
+endsnippet
+
+snippet actreport "ir.actions.report.xml"
+return {
+    "type": "ir.actions.report.xml",
+    "report_name": "report.name",
+    "datas": {
+        "model":"my.model",
+        "ids": ids,
+        "report_type": "pdf",
+        },
+    "nodestroy": True
+}
+endsnippet
+
+snippet import
+from odoo import ${1:_, }${2:api, }${3:exceptions, }${4:fields, }${5:models}
+
+$0
+endsnippet
+
+snippet otest "Odoo Unit Tests"
+from odoo.tests import tagged
+from odoo.tests.common import ${3:TransactionCase, SavepointCase, HttpCase}
+
+
+@tagged("-at_install", "post_install")
+class ${1:TestX}(${2:TransactionCase}):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+endsnippet
+
+snippet ocursor "Create a new database cursor with env"
+
+from odoo import api, registry, SUPERUSER_ID
+reg = registry(self.env.cr.dbname)
+with api.Environment.manage(), reg.cursor() as new_cr:
+    new_env = api.Environment(new_cr, SUPERUSER_ID, {})
+endsnippet
+
+snippet onewenv "Do in new env"
+import odoo
+reg = odoo.registry(self.env.cr.dbname)
+with odoo.api.Environment.manage(), reg.cursor() as new_cr:
+	new_env = odoo.api.Environment(new_cr, self.env.uid, self.env.context)
+	new_self = new_env[self._name]
+	$0
+endsnippet
+
+# =======
+# OLD API
+# =======
+
+snippet osv "New OSV class" b
+class ${1:my_model}(osv.${2:osv}):
+    _name = '${3:${1/_/\./g}}'
+    _description = "$4"
+
+    _columns = {
+        $5
+    }
+
+    _defaults = {
+        $6
+    }
+
+$1()
+endsnippet
+
+snippet osvi "Inherit OSV class" b
+class ${1:my_model}(osv.${2:osv}):
+    _inherit = '${3:${1/_/\./g}}'
+
+    _columns = {
+        $4
+    }
+
+$1()
+endsnippet
+
+snippet osvm "osv method"
+def ${1:method}(self, cr, uid, ${2:ids,} $3context=None):
+    """${4:Docstring}"""
+    if context is None:
+        context = {}
+    for ${5:line} in self.browse(cr, uid, ids, context=context):
+        $6
+    return True
+endsnippet
+
+snippet osvmi "Inherit osv method"
+def ${1:method}(self, cr, uid, ${2:ids,} $3context=None):
+    """${4:Overload the method to $5}"""
+    res = super(${6:class_name}, self).$1(
+        cr, uid, $2 $3context=context)
+    for ${7:line} in self.browse(cr, uid, ids, context=context):
+        pass
+    return res
+endsnippet
+
+snippet osvc "osv method create"
+def create(self, cr, uid, vals, context=None):
+    return super(${1:class_name}, self).create(
+        cr, uid, vals, context=context)
+endsnippet
+
+snippet osvw "osv method write"
+def write(self, cr, uid, ids, vals, context=None):
+    return super(${1:class_name}, self).write(
+        cr, uid, ids, vals, context=context)
+endsnippet
+
+snippet osvu "osv method unlink"
+def unlink(self, cr, uid, ids, context=None):
+    return super(${1:class_name}, self).unlink(
+        cr, uid, ids, context=context)
+endsnippet
+
+snippet osvs "osv method search"
+def search(self, cr, uid, args, offset=0, limit=None, order=None,
+           context=None, count=False):
+    return super(${1:class_name}, self).search(
+        cr, uid, args, offset=offset, limit=limit, order=order,
+        context=context, count=count)
+endsnippet
+
+snippet osvcp "osv method copy"
+def copy(self, cr, uid, id, default=None, context=None):
+    """${1:Overload the standard method to $2}"""
+    if not default:
+        default = {}
+    #record = self.browse(cr, uid, id, context=context)
+    #default['name'] = False
+    return super(${3:class_name}, self).copy(
+        cr, uid, id, default, context=context)
+endsnippet
+
+snippet osvf "osv method fields.function"
+def _${1:function}(self, cr, uid, ids, name, arg, context=None):
+    """${2:fields.function '$1'.}"""
+    if context is None:
+        context = {}
+    res = {}
+    for ${3:line} in self.browse(cr, uid, ids, context=context):
+        res[$3.id] = False
+    return res
+endsnippet
+
+snippet osvfi "osv method fields.function (write)"
+def _${1:function}_inv(self, cr, uid, ids, name, arg, context=None):
+    """${2:fields.function '$1'} (write)."""
+    if context is None:
+        context = {}
+    if not value:
+        return False
+    return True
+endsnippet
+
+snippet osvfs "osv method fields.function (search)"
+def _${1:function}_search(self, cr, uid, obj, name, arg, context=None):
+    """${2:fields.function '$1'} (search)."""
+    if context is None:
+        context = {}
+    return []
+endsnippet
+
+snippet osvd "osv method default_get"
+def default_get(self, cr, uid, fields, context=None):
+    """'default_get' method overridden."""
+    res = super(${1:class_name}, self).default_get(
+        cr, uid, fields, context=context)
+    return res
+endsnippet
+
+snippet osvo "osv method onchange"
+def onchange_${1:field}(self, cr, uid, ids, $1${2}, context=None):
+    """'on_change' method for the '$1' field."""
+    if context is None:
+        context = {}
+    value = {}
+    warning = {}
+    return {'value': value, 'warning': warning}
+endsnippet
+
+snippet script_oerplib "Script OERPLib"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Script to ${1:TODO}."""
+import oerplib
+
+# OpenERP connection
+HOST = "localhost"
+PORT = 8069
+DB = "database"
+USER = "admin"
+PWD = "admin"
+PROCESS_OK = False
+
+
+def main():
+    # OpenERP login
+    oerp = oerplib.OERP(HOST, DB, port=PORT)
+    oerp.login(USER, PWD)
+
+
+if __name__ == "__main__":
+    main()
+endsnippet
+
+snippet script_odoorpc "Script OdooRPC"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Script to ${1:TODO}."""
+import odoorpc
+
+# Odoo connection
+HOST = "localhost"
+PORT = 8069
+DB = "database"
+USER = "admin"
+PWD = "admin"
+PROCESS_OK = False
+
+
+def main():
+    # Odoo login
+    odoo = odoorpc.ODOO(HOST, port=PORT)
+    odoo.login(DB, USER, PWD)
+
+
+if __name__ == "__main__":
+    main()
+endsnippet

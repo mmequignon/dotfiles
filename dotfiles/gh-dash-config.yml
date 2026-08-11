@@ -1,0 +1,63 @@
+prSections:
+  - title: Cosanum PRs
+    filters: is:open repo:camptocamp/cosanum_odoo
+  - title: Alloboissons PRs
+    filters: is:open repo:camptocamp/alloboissons_odoo
+  - title: OCA sale-workflow
+    filters: is:open repo:OCA/sale-workflow crm-sales-marketing-maintainers in:comments
+#issuesSections:
+#- title: My Issues
+  #filters: is:open author:@me
+#- title: Assigned
+  #filters: is:open assignee:@me
+#- title: Involved
+  #filters: is:open involves:@me -author:@me
+defaults:
+  preview:
+    open: true
+    width: 50
+  prsLimit: 20
+  issuesLimit: 20
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 7
+      repo:
+        width: 15
+      author:
+        width: 15
+      assignees:
+        width: 20
+        hidden: true
+      base:
+        width: 15
+        hidden: true
+      lines:
+        width: 16
+    issues:
+      updatedAt:
+        width: 7
+      repo:
+        width: 15
+      creator:
+        width: 10
+      assignees:
+        width: 20
+        hidden: true
+  refetchIntervalMinutes: 30
+keybindings:
+  issues: []
+  prs:
+    - key: c
+      command: >
+        tmux new-window -c {{.RepoPath}} 'gh pr checkout {{.PrNumber}} && nvim -c ":DiffviewOpen {{.BaseRefName}}...{{.HeadRefName}}"'
+repoPaths:
+  camptocamp/*: ~/projects/*
+  OCA/*: ~/OCA/*
+theme:
+  ui:
+    table:
+      showSeparator: true
+pager:
+  diff: "delta"

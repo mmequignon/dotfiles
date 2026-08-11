@@ -1,0 +1,7 @@
+github.com:
+    "*":
+        orgs:
+            - odoo
+            - OCA
+            - camptocamp
+        private: True

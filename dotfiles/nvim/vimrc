@@ -1,0 +1,170 @@
+set nocompatible
+set title
+
+" folding
+set foldmethod=syntax
+set foldlevel=1
+
+set encoding=utf-8
+set fileencoding=utf-8
+
+set number
+set nowrap
+set mouse=n
+let mapleader=","
+let maplocalleader=";"
+set bs=2
+
+
+
+syntax enable
+set showmatch
+let python_highlight_all = 1
+
+set termguicolors
+colorscheme selenized
+set background=dark
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+match ErrorMsg /\s\+$\| \+\ze\t/
+
+set expandtab           " enter spaces when tab is pressed
+set tabstop=4           " use 4 spaces to represent tab
+set softtabstop=4
+set shiftwidth=4        " number of spaces to use for auto indent
+set showcmd                     " show (partial) command in status line
+
+set colorcolumn=89
+set cul
+set cuc
+set fileformat=unix
+set hid
+
+set noswapfile
+
+" splits
+
+set splitbelow
+set splitright
+
+" Make moving between splits more friendly
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+let g:ackprg = 'ag --vimgrep'
+let g:ack_autoclose = 1
+
+set laststatus=2
+let g:airline_theme='zenburn'
+let g:airline_symbols = {}
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#error_symbol = '✗ '
+let g:airline#extensions#ale#warning_symbol = '⚠ '
+
+let b:ale_linters = ['pylint']
+let g:ale_linters = {
+\    'python': ['pylint'],
+\}
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+
+
+let g:ale_python_pylint_options = '--rcfile /home/matthieu/.vim/pylintrc'
+
+set rtp+=~/.fzf
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+\ 'bg':      ['bg', 'Normal'],
+\ 'hl':      ['fg', 'Comment'],
+\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+\ 'hl+':     ['fg', 'Statement'],
+\ 'info':    ['fg', 'PreProc'],
+\ 'border':  ['fg', 'Ignore'],
+\ 'prompt':  ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker':  ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header':  ['fg', 'Comment'] }
+
+autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.class$', '\.hi$', '\.o$', '\.aux$', '\.nav$', '\.log$', '\.out$', '\.pdf$', '\.snm$', '\.toc$', '\.sty$', '__pycache__', '\.egg-info$']    " Files to ignore (default = ['\~$'])
+let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI=1
+let NERDTreeMinimalMenu=1
+let NERDTreeAutoDeleteBuffer = 1
+
+nnoremap <silent> <F2> :bprevious<CR>
+nnoremap <silent><expr> <F3> g:NERDTree.IsOpen() ? ":NERDTreeClose\<CR>" : bufname("%") == "" ? ":NERDTreeCWD\<CR>" : ":NERDTreeFind\<CR>"
+nnoremap <silent> <F4> :TagbarToggle <CR> \| :TagbarTogglePause<CR>
+nnoremap <silent> <F5> :UndotreeToggle<cr>
+nnoremap <silent> <F12> :nohl<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <silent> <F6> :let @* = expand("%")<cr>
+
+vnoremap <Leader>p d:r! python3 -c 'import pprint; pprint.pprint(<C-r>"<C-r> , indent=4)' +\%c<CR>
+
+"désactivation de la surbrillance de la dernière recherche ctrl + n
+nnoremap <Leader>* :nohl<CR>
+
+"classer avec leader + s
+vnoremap <Leader>s :sort<CR>
+
+"manipuler des blocs complets avec < et >
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <Leader>k :CloseHiddenBuffers<CR>
+
+nnoremap Y yy
+nnoremap <Leader>- yyp<c-v>$r-
+nnoremap <Leader>+ yyp<c-v>$r+
+nnoremap <Leader>_ yyp<c-v>$r_
+nnoremap <Leader>= yyp<c-v>$r=
+" bind K to search word under cursor
+nnoremap K :Rg <C-R><C-W>
+nnoremap F :FZF<CR> <C-R><C-W>
+nnoremap F :FZF<CR>
+nnoremap W :HopWord<CR>
+
+vnoremap <Leader>p d:r! python3 -c 'import pprint; pprint.pprint(<C-r>"<C-r> , indent=4)' +\%c<CR>
+
+" nmap <silent> <unique> + <Plug>nextvalInc
+" nmap <silent> <unique> - <Plug>nextvalDec
+
+let g:markdown_composer_browser = 'surf'
+
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_sort = 0
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_compact = 1
+
+if !exists('g:undotree_WindowLayout')
+  let g:undotree_WindowLayout = 3
+endif
+
+
+com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+nnoremap = :FormatXML<Cr>
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "ultisnips_custom"]
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+
+autocmd CompleteDone * silent! pclose!
+let g:jedi#completions_enabled = 0
+"let g:deoplete#enable_at_startup = 1

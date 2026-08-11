@@ -1,0 +1,334 @@
+snippet pdb
+<t t-debug="pdb" />
+endsnippet
+
+snippet attribute
+<attribute name="${1:attribute_name}">$0</attribute>
+endsnippet
+
+snippet action_tree
+<record id="${1:action_method_name}" model="ir.actions.server">
+	<field name="name">${2:Action Name}</field>
+	<field name="model_id" ref="${3:module}.model_${4:model_name}"/>
+	<field name="binding_model_id" ref="$3.model_$4"/>
+	<field name="binding_view_types">form,list</field>
+	<field name="state">code</field>
+	<field name="code">action = records.$1()</field>
+</record>
+endsnippet
+
+snippet openerp "<openerp><data>"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright ${1:`date +%Y`} Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<openerp>
+<data>
+
+  $2
+
+</data>
+</openerp>
+endsnippet
+
+snippet template
+<template id="${1:report_name}" inherit_id="${2:module_name}.$1">
+  $0
+</template>
+endsnippet
+
+snippet rule
+<record id="${1:record_rule_xml_id}" model="ir.rule">
+  <field name="name">${2:Record rule name}</field>
+  <field name="model_id" ref="${3:module}.model_${4:model_name}"/>${6:
+  <field name="domain_force">[(${5:applied domain})]</field>}${8:
+  <field name="groups" eval="[(4, ref('${7:xmlid}'), 0)]"/>}${9:
+  <field name="perm_create" eval="1"/>}${10:
+  <field name="perm_read" eval="1"/>}${11:
+  <field name="perm_write" eval="1"/>}${12:
+  <field name="perm_unlink" eval="1"/>}
+  $13
+</record>
+endsnippet
+
+snippet odoo "<odoo><data>"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright ${1:`date +%Y`} Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+  $2
+
+</odoo>
+endsnippet
+
+snippet odool "<odoo><data>"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright ${1:`date +%Y`} Camptocamp SA
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+  $2
+
+</odoo>
+endsnippet
+
+snippet record "XML Record"
+<record id="${1:model_name}_${2:name}" model="${1/_/\./g}">
+  $3
+</record>
+endsnippet
+
+snippet group "<field>"
+<group name="${1:name}"$2>
+  $3
+</group>
+endsnippet
+
+snippet field "<field>"
+<field name="${1:name}">$2</field>
+endsnippet
+
+snippet filter "<filter>"
+<filter name="${1:name}" string="${2:Name}"
+  ${3:domain="[$4]"}
+  ${5:context="{${6:'group_by': '$7'}}"}/>
+endsnippet
+
+snippet viewt "Tree View"
+<record id="${1:model_name}_view_tree" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.tree</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="arch" type="xml">
+    <tree string="$2">
+      $3
+    </tree>
+  </field>
+</record>
+endsnippet
+
+snippet viewti "Tree View (inherit)"
+<record id="${1:original_id}" model="ir.ui.view">
+  <field name="name">${2:model.name}.tree.inherit</field>
+  <field name="model">${2/_/\./g}</field>
+  <field name="inherit_id" ref="${3:module}.$1}"/>
+  <field name="arch" type="xml">
+    $4
+  </field>
+</record>
+endsnippet
+
+snippet viewf "Form View"
+<record id="${1:model_name}_view_form" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.form</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="arch" type="xml">
+    <form string="$2" ${3:version="7.0"}>${4:
+      <header>
+        $5
+      </header>}
+      <sheet>
+        $6
+      </sheet>${7:
+      <footer>
+        $8
+      </footer>}
+    </form>
+  </field>
+</record>
+endsnippet
+
+snippet vieww "Wizard View"
+<record id="${1:model_name}_form" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.form</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="arch" type="xml">
+    <form string="$2">
+      <sheet>
+        $4
+      </sheet>
+      <footer>
+        <button name="${5:validate}" type="object"
+          string="${6:Validate}" class="btn-primary"/>
+        <button special="cancel" string="${7:Cancel}" class="btn-default"/>
+      </footer>
+    </form>
+  </field>
+</record>
+endsnippet
+
+snippet viewfi "view form_inherit"
+<record id="${1:model_name}_view_form_inherit" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.form.inherit</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="type">form</field>
+  <field name="inherit_id" ref="${2:module.view_ref}"/>
+  <field name="arch" type="xml">
+    $3
+  </field>
+</record>
+endsnippet
+
+snippet viewg "view graph"
+<record id="${1:model_name}_view_graph" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.form</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="arch" type="xml">
+    <graph string="$2" type="pivot">
+      <field name="product_id" type="row"/>
+      <field name="inventory_value" type="measure"/>
+    </graph>
+  </field>
+</record>
+endsnippet
+
+snippet viewgi "view graph_inherit"
+<record id="${1:model_name}_view_graph_inherit" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.graph.inherit</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="inherit_id" ref="${2:module.view_ref}"/>
+  <field name="arch" type="xml">
+    $3
+  </field>
+</record>
+endsnippet
+
+snippet views "view search"
+<record id="${1:model_name}_view_search" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.search</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="type">search</field>
+  <field name="arch" type="xml">
+    <search string="$2">
+      $3
+    </search>
+  </field>
+</record>
+endsnippet
+
+snippet viewsi "view search_inherit"
+<record id="${1:model_name}_view_search_inherit" model="ir.ui.view">
+  <field name="name">${1/_/\./g}.search.inherit</field>
+  <field name="model">${1/_/\./g}</field>
+  <field name="type">search</field>
+  <field name="inherit_id" ref="${2:module.view_ref}"/>
+  <field name="arch" type="xml">
+    $3
+  </field>
+</record>
+endsnippet
+
+snippet viewi "Inherited View"
+<record id="${1:original_id}" model="ir.ui.view">
+  <field name="name">${2:model.name}.${3:tree}.inherit</field>
+  <field name="model">${2/_/\./g}</field>
+  <field name="inherit_id" ref="${4:module}.$1"/>
+  <field name="arch" type="xml">
+    $5
+  </field>
+</record>
+endsnippet
+
+
+snippet action "action"
+<record id="${1:model_name}_action" model="ir.actions.act_window">
+  <field name="name">${2:Name}</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="res_model">${3:${1/_/\./g}}</field>
+  <field name="view_type">form</field>
+  <field name="view_id" ref="${4:$1}_view_${5:tree}"/>
+</record>
+endsnippet
+
+snippet menu "menu"
+<menuitem id="${1:model_name}_menu"
+  parent="${2:module.menu_parent}"
+  action="${1}_action"/>
+endsnippet
+
+snippet menua "menu action" m
+<record id="${1:model_name}_action" model="ir.actions.act_window">
+  <field name="name">${2:Name}</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="res_model">${3:${1/_/\./g}}</field>
+  <field name="view_type">form</field>
+  <field name="view_id" ref="${4:$1}_view_${5:tree}"/>
+</record>
+
+<menuitem id="$1_menu"
+  parent="${5:module.menu_parent}"
+  action="$1_action"/>
+endsnippet
+
+snippet multia "action multi"
+<act_window id="${1:model_name}_action"
+  name="${2:Name}"
+  src_model="${3:from_model_name}"
+  res_model="${4:${1/_/\./g}}"
+  view_mode="form"
+  target="new"
+  key2="client_action_multi"/>
+endsnippet
+
+snippet buttono "button object"
+<button name="${1:validate}" type="object"
+  string="${2:Validate}" class="oe_highlight"/>
+endsnippet
+
+snippet buttonc "button cancel"
+<button special="cancel"
+  string="${2:Cancel}" class="oe_inline"/>
+endsnippet
+
+snippet xpath "xpath"
+<xpath expr="/${1:form}/${2:field}[@${3:name}='${4:name}']" position="${5:after}">
+  ${6}
+</xpath>
+endsnippet
+
+snippet sequence "sequence" m
+<!-- ${1/_/\./g} sequence -->
+
+<record id="sequence_type_${1:my_model}" model="ir.sequence.type">
+  <field name="name">${2:MyModel}</field>
+  <field name="code">${1/_/\./g}</field>
+</record>
+
+<record id="sequence_$1" model="ir.sequence">
+  <field name="name">$2</field>
+  <field name="code">${1/_/\./g}</field>
+  <field name="prefix">%(year)s-</field>
+  <field name="padding" eval="${3:3}"/>
+  <field name="number_next">${4:000}</field>
+  <field name="number_increment">1</field>
+</record>
+endsnippet
+
+snippet cron "ir.cron >= 11"
+<record model="ir.cron" id="cron_$1">
+  <field name='name'>${2:Name}</field>
+  <field name='interval_number'>${3:1}</field>
+  <field name='interval_type'>${4:days}</field>
+  <field name="numbercall">${5:-1}</field>
+  <field name="active" eval="True"/>
+  <field name="doall" eval="${6:False}" />
+  <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')"/>
+  <field name="model_id" ref="${7:module}.model_${8:res_partner}"/>
+  <field name="state">code</field>
+  <field name="code">model.${9:method_to_call}()</field>
+</record>
+endsnippet
+
+snippet cron "ir.cron Odoo <= 10"
+<record model="ir.cron" id="cron_$1">
+  <field name='name'>${2:Name}</field>
+  <field name='interval_number'>${3:1}</field>
+  <field name='interval_type'>${4:days}</field>
+  <field name="numbercall">${5:-1}</field>
+  <field name="active" eval="True"/>
+  <field name="doall" eval="${6:False}" />
+  <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')"/>
+  <field name="model">${7:res.partner}</field>
+  <field name="function">${8:method_to_call}</field>
+  <field name="args">${9:()}</field>
+</record>
+endsnippet
