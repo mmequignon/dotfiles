@@ -17,6 +17,7 @@
 <Multi_key> <grave> <u>                                  : "ù" U00F9
 <Multi_key> <apostrophe> <e>                                 : "é" U00E9
 <Multi_key> <apostrophe> <c>                                 : "ç" U00E7
+<Multi_key> <apostrophe> <C>                                 : "Ç" U00C7
 <Multi_key> <quotedbl> <e>                                      : "ë" U00EB
 <Multi_key> <quotedbl> <i>                                      : "ï" U00E7F
 
@@ -134,3 +135,4 @@
 <Multi_key> <s> <s> <i>                                      : "si et seulement si"
 <Multi_key> <b> <l> <a> <h>                                  : "blah-biddy, bloo-blah, blah-blah-biddy, bloo-blah"
 <Multi_key> <n> <i> <k>                                      : "(╯°□°）╯︵ ┻━┻"
+<Multi_key> <m> <e> <h>                                      : "¯\_(ツ)_/¯"
