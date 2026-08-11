@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  MAIL_ADDR = "matthieu.mequignon@camptocamp.com";
+  MAIL_ADDR = import ./secrets/malignly.nix;
   GPG_SIGNING_KEY = import ./secrets/indented.nix;
   git-autoshare = with pkgs.python3Packages; buildPythonPackage rec {
     pname = "git-autoshare";
