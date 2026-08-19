@@ -20,7 +20,7 @@ in
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentry.package = pkgs.pinentry-qt;
     defaultCacheTtl = 18000;
     maxCacheTtl = 36000;
     defaultCacheTtlSsh = 18000;
@@ -34,7 +34,7 @@ in
       "${ssh_key}"
     ];
   };
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
       export GPG_TTY=$(tty)
   '';
 }
