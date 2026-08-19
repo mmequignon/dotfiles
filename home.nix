@@ -18,8 +18,8 @@ in {
   };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "mmequignon";
-  home.homeDirectory = "/home/mmequignon";
+  home.username = "deck";
+  home.homeDirectory = "/home/deck";
 
   imports = [
     ./packages.nix
