@@ -23,8 +23,5 @@
       ./tagbar.nix
       ./hop.nix
       ./markdown.nix
-      # ./copilot.nix
-      # ./obsidian.nix
-      # ./image.nix
   ];
 }

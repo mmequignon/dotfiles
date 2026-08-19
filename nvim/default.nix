@@ -21,7 +21,7 @@ in {
     };
     imports = [
       # Propagate nixvim
-      nixvim.homeManagerModules.nixvim
+      nixvim.homeModules.nixvim
       ./settings.nix
       ./colorscheme.nix
       ./plugins.nix

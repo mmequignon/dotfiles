@@ -8,16 +8,7 @@
         mode = "n";
         options.expr = true;
       }
-      # {
-      #   key = "<F3>";
-      #   action = ":NvimTreeFindFileToggle<CR>";
-      #   mode = "n";
-      #   options.silent = true;
-      # }
     ];
-    # plugins.nvim-tree = {
-    #     enable = true;
-    # };
     extraPlugins = with pkgs.vimPlugins; [
       nerdtree
       vim-devicons
